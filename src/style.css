@@ -1,0 +1,13 @@
+.container {
+  color: red;
+}
+
+.input--time {
+}
+
+.button-startCount {
+  padding: 1em;
+  color: white;
+  background-color: rebeccapurple;
+  border: none;
+}

@@ -7,8 +7,8 @@ module.exports = {
   entry: {
     app: "./src/index.js",
   },
+
   plugins: [
-    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: "Output Management",
     }),
@@ -16,6 +16,11 @@ module.exports = {
   output: {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
+  },
+  devServer: {
+    contentBase: path.join(__dirname, "dist"),
+    compress: true,
+    port: 9000,
   },
   devtool: "inline-source-map",
   module: {

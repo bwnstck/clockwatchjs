@@ -1,12 +1,26 @@
 import "./style.css";
+import { createElement } from "./utils/elements";
 
 function component() {
-  const element = document.createElement("div");
+  const timeOutput = createElement("span", {
+    className: "timeOutput",
+    innerText: "1000",
+  });
+  const timeInput = createElement("input", {
+    className: "input--time",
+    placeholder: "hh:mm:ss",
+  });
 
-  // Lodash, now imported by this script
-  element.innerHTML = "Moin";
+  const timerButton = createElement("button", {
+    className: "button--startCount",
+    innerText: "Count",
+  });
+  const Container = createElement("div", {
+    className: "container",
+    children: [timeInput, timerButton, timeOutput],
+  });
 
-  return element;
+  return Container;
 }
 
 document.body.appendChild(component());
