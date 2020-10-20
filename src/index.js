@@ -4,7 +4,7 @@ import { createElement } from "./utils/elements";
 // !Variables
 
 let startInterval = false;
-let sec = 10;
+let sec = 0;
 let min = 0;
 let h = 0;
 
@@ -84,6 +84,8 @@ function countDownOne() {
 function startTimer() {
   if (getInput()) {
     counter = timeToSeconds({ h: Number(h), m: Number(min), s: Number(sec) });
+    const inputText = document.querySelector(".input--time");
+    inputText.value = 0;
     console.log("counterNumber", counter);
   }
   if (!startInterval) {
@@ -101,11 +103,18 @@ function stopTimer() {
   );
 }
 
-function resetTimer() {
-  counter = getInput();
-  console.log(counter);
-  const counterNumber = document.querySelector(".timeOutput");
-  counterNumber.innerHTML = `${String(counter).toHHMMSS()} Sekunden`;
+function resetTimer(counterNumber) {
+  // const counterNumber = document.querySelector(".timeOutput");
+  if (getInput() != undefined) {
+    sec = 0;
+    min = 0;
+    h = 0;
+    console.log("counter", counter);
+    counter = 0;
+    counterNumber.innerHTML = `${counter} Sekunden`;
+  } else {
+    return;
+  }
 }
 
 // !Helper Functions
@@ -163,7 +172,7 @@ function createTimer() {
   const resetButton = createElement("button", {
     className: "button--reset",
     innerText: "Reset",
-    onclick: () => resetTimer(),
+    onclick: () => resetTimer(timeOutput),
   });
 
   const Container = createElement("div", {
