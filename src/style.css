@@ -15,6 +15,9 @@
 .input--time {
 }
 
+.timeOutput {
+  font-size: 2rem;
+}
 .button--startCount {
   padding: 1em;
   color: white;
