@@ -20,7 +20,15 @@
 }
 .button--startCount,
 .button--stopCount {
-  padding: 1em;
+  margin: 1 auto;
+  padding: 0.5em;
+  color: white;
+  background-color: rebeccapurple;
+  border: none;
+  border-radius: 10px;
+}
+.button--reset {
+  padding: 0.5em;
   color: white;
   background-color: rebeccapurple;
   border: none;

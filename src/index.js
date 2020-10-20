@@ -1,10 +1,32 @@
 import "./style.css";
 import { createElement } from "./utils/elements";
 
+// !Variables
 let startInterval = false;
 let counter = 400;
 
+// !Input Functions
+function getInput() {
+  const inputField = document.querySelector(".input--time");
+  if (inputField.value) {
+    console.log("InputValue: ", inputField.value);
+    return inputField.value;
+  }
+  console.log("Nichts zum returnen");
+}
+
+// !Timer Functions
+function countDownOne() {
+  counter--;
+  const counterNumber = document.querySelector(".timeOutput");
+  counterNumber.innerHTML = `${counter}ms`;
+  console.log(counterNumber.innerHTML);
+}
+
 function startTimer() {
+  if (getInput()) {
+    counter = getInput();
+  }
   if (!startInterval) {
     startInterval = setInterval(countDownOne, 100);
     changeBackgroundOf("red", document.querySelector(".button--stopCount"));
@@ -20,17 +42,20 @@ function stopTimer() {
   );
 }
 
+function resetTimer() {
+  counter = 400;
+  const counterNumber = document.querySelector(".timeOutput");
+  counterNumber.innerHTML = `${counter}ms`;
+}
+
+// !Helper Functions
+
 function changeBackgroundOf(color, button) {
   button.style.backgroundColor = color;
 }
-function countDownOne() {
-  counter--;
-  const counterNumber = document.querySelector(".timeOutput");
-  counterNumber.innerHTML = `${counter}ms`;
-  console.log(counterNumber.innerHTML);
-}
 
-function component() {
+// ! JS to HTML Contructor
+function createTimer() {
   const timeOutput = createElement("span", {
     className: "timeOutput",
     innerHTML: `${counter}ms`,
@@ -52,13 +77,24 @@ function component() {
     innerText: "Stop",
     onclick: () => stopTimer(),
   });
+  const resetButton = createElement("button", {
+    className: "button--reset",
+    innerText: "Reset",
+    onclick: () => resetTimer(),
+  });
 
   const Container = createElement("div", {
     className: "container",
-    children: [timeInput, timerButtonStart, timerButtonStop, timeOutput],
+    children: [
+      timeInput,
+      timerButtonStart,
+      timerButtonStop,
+      timeOutput,
+      resetButton,
+    ],
   });
 
   return Container;
 }
 
-document.body.appendChild(component());
+document.body.appendChild(createTimer());
