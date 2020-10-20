@@ -152,8 +152,7 @@ function createTimer() {
   });
   const explanation = createElement("p", {
     className: "explanation",
-    innerHTML:
-      "Put Time in the given format <br><br> 120 is 1 Minute 20 Seconds,<br> 1120 is 11 Minutes and 20 Seconds",
+    innerHTML: "11 = 11 sec <br> 120 = 1min20sec <br> 1000 = 10min",
   });
   const timeOutput = createElement("span", {
     className: "timeOutput",
