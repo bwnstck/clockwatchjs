@@ -1,7 +1,7 @@
 import "./style.css";
 import { createElement } from "./utils/elements";
 
-var startInterval;
+let startInterval = null;
 let counter = 400;
 
 function startTimer() {
@@ -35,17 +35,13 @@ function component() {
   const timerButtonStart = createElement("button", {
     className: "button--startCount",
     innerText: "Count Down",
-    onclick: () => {
-      startTimer();
-    },
+    onclick: () => startTimer(),
   });
 
   const timerButtonStop = createElement("button", {
     className: "button--startCount",
     innerText: "Stop",
-    onclick: () => {
-      stopTimer();
-    },
+    onclick: () => stopTimer(),
   });
 
   const Container = createElement("div", {
