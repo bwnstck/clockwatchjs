@@ -1,18 +1,28 @@
 @import url("https://fonts.googleapis.com/css2?family=Fira+Code&display=swap");
+:root {
+  --rebecca-purple: #663399ff;
+  --white: #ffffffff;
+  --darkwhite: rgb(225, 225, 225);
+  --dark-jungle-green: #182825ff;
+  --french-raspberry: #ce2d4fff;
+  --dark-raspberry: rgb(99, 6, 26);
+  --ocean-green: #63b995ff;
+}
+
 body {
+  background-color: var(--rebecca-purple);
+  color: var(--white);
   font-family: "Fira Code", monospace;
 }
 
 .pageTitle {
-  color: black;
   font-size: 2rem;
 }
 .container {
-  color: red;
   display: grid;
   align-content: center;
 
-  width: 80%;
+  width: 200px;
   height: 100vh;
   margin: auto;
   text-align: center;
@@ -21,27 +31,61 @@ body {
 .container > * {
   margin: 0.5em;
 }
+.mainTimer {
+  background-color: var(--dark-jungle-green);
+
+  margin: auto;
+  display: grid;
+  grid-template-rows: auto 1fr 1fr auto;
+  position: relative;
+  align-content: center;
+  border-radius: 7px;
+}
+
 .input--time {
+  width: 50%;
+  border: none;
+  font-size: 1.1em;
+  margin: 1em auto;
+  text-align: center;
+  color: var(--rebecca-purple);
+  border-radius: 7px;
+}
+
+.button--startCount,
+.button--stopCount {
+  width: 15ch;
+  margin: 1em auto;
+  padding: 0.5em;
+  color: var(--white);
+  background-color: var(--rebecca-purple);
+  border: none;
+  border-radius: 7px;
+}
+.button--startCount {
+  background-color: var(--ocean-green);
+}
+.button--stopCount {
+  background-color: var(--dark-raspberry);
 }
 
 .timeOutput {
+  color: var(--french-raspberry);
+  background-color: var(--darkwhite);
   font-size: 2rem;
+  padding: 0.5rem;
+  border-radius: 7px;
+  transition: 0.2s ease-in-out;
 }
-.button--startCount,
-.button--stopCount {
-  margin: 1 auto;
-  padding: 0.5em;
-  color: white;
-  background-color: rebeccapurple;
-  border: none;
-  border-radius: 10px;
-}
+
 .button--reset {
   padding: 0.5em;
+  width: 100px;
+  margin: auto;
   color: white;
-  background-color: rebeccapurple;
+  background-color: var(--dark-jungle-green);
   border: none;
-  border-radius: 10px;
+  border-radius: 7px;
 }
 
 .explanation {

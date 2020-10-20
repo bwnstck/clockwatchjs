@@ -72,12 +72,28 @@ function inputToSeconds(value) {
   }
 }
 
+function scaleUp(element, time) {
+  setTimeout(() => {
+    element.style.transform = "scale(1.5)";
+  }, time);
+}
+function scaleDown(element, time) {
+  setTimeout(() => {
+    element.style.transform = "scale(1)";
+  }, time);
+}
+
 // !Timer Functions
 function countDownOne() {
   if (counter > 0) {
     counter--;
   } else {
     stopTimer();
+    const rumbleBox = document.querySelector(".timeOutput");
+    scaleUp(rumbleBox, 0);
+    scaleDown(rumbleBox, 200);
+    scaleUp(rumbleBox, 400);
+    scaleDown(rumbleBox, 600);
   }
   const counterNumber = document.querySelector(".timeOutput");
   counterNumber.innerHTML = `${String(counter).toHHMMSS()} Sekunden`;
@@ -103,12 +119,11 @@ function startTimer() {
   } else {
   }
 }
-
 function stopTimer() {
   clearInterval(startInterval);
   startInterval = false;
   changeBackgroundOf(
-    "rebeccapurple",
+    "rgb(99, 6, 26)",
     document.querySelector(".button--stopCount")
   );
 }
@@ -190,6 +205,11 @@ function createTimer() {
     onclick: () => resetTimer(timeOutput, timeInput),
   });
 
+  const mainTimer = createElement("div", {
+    className: "mainTimer",
+    children: [timeInput, timerButtonStart, timerButtonStop],
+  });
+
   const formContainer = createElement("form", {
     className: "formContainer",
     children: [],
@@ -200,9 +220,7 @@ function createTimer() {
       title,
       explanation,
       formContainer,
-      timeInput,
-      timerButtonStart,
-      timerButtonStop,
+      mainTimer,
       timeOutput,
       resetButton,
     ],
