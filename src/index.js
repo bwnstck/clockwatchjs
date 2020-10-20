@@ -75,10 +75,16 @@ function inputValidation(value) {
 
 // !Timer Functions
 function countDownOne() {
-  counter--;
   const counterNumber = document.querySelector(".timeOutput");
+  if (counter > 0) {
+    counter--;
+  } else {
+    stopTimer();
+    return;
+  }
   counterNumber.innerHTML = `${String(counter).toHHMMSS()} Sekunden`;
   console.log(counterNumber.innerHTML);
+  console.log(counter);
 }
 
 function startTimer() {
@@ -93,6 +99,7 @@ function startTimer() {
   }
   if (!startInterval) {
     startInterval = setInterval(countDownOne, 1000);
+
     changeBackgroundOf("red", document.querySelector(".button--stopCount"));
   }
 }
