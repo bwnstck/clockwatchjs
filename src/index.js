@@ -86,6 +86,9 @@ function startTimer() {
     counter = timeToSeconds({ h: Number(h), m: Number(min), s: Number(sec) });
     const inputText = document.querySelector(".input--time");
     inputText.value = 0;
+    const outputText = document.querySelector(".timeOutput");
+    outputText.innerHTML = `${String(counter).toHHMMSS()} Sekunden`;
+    inputText.value = 0;
     console.log("counterNumber", counter);
   }
   if (!startInterval) {
