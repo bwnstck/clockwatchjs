@@ -5,7 +5,7 @@ import { createElement } from "./utils/elements";
 
 let startInterval = false;
 let sec = 0;
-let min = 0;
+let min = 20;
 let h = 0;
 
 let counter = timeToSeconds({ h: h, m: min, s: sec });
@@ -17,21 +17,19 @@ function getInput() {
 
   if (inputFieldValue) {
     return inputValidation(inputFieldValue);
+  } else {
+    counter = 0;
+    console.log("Nichts zu returnen");
   }
-  console.log("Nichts zum returnen");
 }
 
 function timeToSeconds(timeObj) {
   let seconds = timeObj.h * 3600 + timeObj.m * 60 + timeObj.s;
-
-  console.log("OBJEKT", timeObj);
-  console.log("SEKONDS", seconds);
   return seconds;
 }
 
 function inputValidation(value) {
   let stringValueLength = value.toString().length;
-  console.log("StringCount: ", stringValueLength);
 
   if (value) {
     if (stringValueLength <= 2) {
@@ -83,8 +81,6 @@ function countDownOne() {
     return;
   }
   counterNumber.innerHTML = `${String(counter).toHHMMSS()} Sekunden`;
-  console.log(counterNumber.innerHTML);
-  console.log(counter);
 }
 
 function startTimer() {
@@ -94,8 +90,6 @@ function startTimer() {
     inputText.value = 0;
     const outputText = document.querySelector(".timeOutput");
     outputText.innerHTML = `${String(counter).toHHMMSS()} Sekunden`;
-    inputText.value = 0;
-    console.log("counterNumber", counter);
   }
   if (!startInterval) {
     startInterval = setInterval(countDownOne, 1000);
@@ -113,15 +107,14 @@ function stopTimer() {
   );
 }
 
-function resetTimer(counterNumber) {
-  // const counterNumber = document.querySelector(".timeOutput");
+function resetTimer(inputField, outputField) {
   if (getInput() != undefined) {
     sec = 0;
     min = 0;
     h = 0;
-    console.log("counter", counter);
     counter = 0;
-    counterNumber.innerHTML = `${counter} Sekunden`;
+    inputField.innerHTML = `${counter} Sekunden`;
+    outputField.innerHTML = `${counter} Sekunden`;
   } else {
     return;
   }
@@ -153,10 +146,14 @@ String.prototype.toHHMMSS = function () {
 
 // ! JS to HTML Contructor
 function createTimer() {
-  const explenation = createElement("p", {
-    className: "explenation",
+  const title = createElement("h1", {
+    className: "pageTitle",
+    innerText: "⏱Final⏱ Countdown",
+  });
+  const explanation = createElement("p", {
+    className: "explanation",
     innerHTML:
-      "Put Time in the given format <br> 120 is 1 Minute 20 Seconds,<br> 1120 is 11 Minutes and 20 Seconds",
+      "Put Time in the given format <br><br> 120 is 1 Minute 20 Seconds,<br> 1120 is 11 Minutes and 20 Seconds",
   });
   const timeOutput = createElement("span", {
     className: "timeOutput",
@@ -166,6 +163,7 @@ function createTimer() {
   const timeInput = createElement("input", {
     className: "input--time",
     placeholder: "hh:mm:ss",
+    min: 1,
   });
 
   const timerButtonStart = createElement("button", {
@@ -182,13 +180,19 @@ function createTimer() {
   const resetButton = createElement("button", {
     className: "button--reset",
     innerText: "Reset",
-    onclick: () => resetTimer(timeOutput),
+    onclick: () => resetTimer(timeOutput, timeInput),
   });
 
+  const formContainer = createElement("form", {
+    className: "formContainer",
+    children: [],
+  });
   const Container = createElement("div", {
     className: "container",
     children: [
-      explenation,
+      title,
+      explanation,
+      formContainer,
       timeInput,
       timerButtonStart,
       timerButtonStop,

@@ -1,7 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code&display=swap");
 body {
-  font-family: "Fredoka One", cursive;
+  font-family: "Fira Code", monospace;
+}
+
+.pageTitle {
+  color: black;
+  font-size: 2rem;
 }
 .container {
   color: red;
@@ -40,7 +44,7 @@ body {
   border-radius: 10px;
 }
 
-.explenation {
+.explanation {
   color: black;
   font-size: 0.8rem;
 }
