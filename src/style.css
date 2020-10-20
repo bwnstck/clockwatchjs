@@ -18,7 +18,8 @@
 .timeOutput {
   font-size: 2rem;
 }
-.button--startCount {
+.button--startCount,
+.button--stopCount {
   padding: 1em;
   color: white;
   background-color: rebeccapurple;

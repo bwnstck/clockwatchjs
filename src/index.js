@@ -1,19 +1,28 @@
 import "./style.css";
 import { createElement } from "./utils/elements";
 
-var startInterval;
+let startInterval = false;
 let counter = 400;
 
 function startTimer() {
   if (!startInterval) {
     startInterval = setInterval(countDownOne, 100);
+    changeBackgroundOf("red", document.querySelector(".button--stopCount"));
   }
 }
 
 function stopTimer() {
   clearInterval(startInterval);
+  startInterval = false;
+  changeBackgroundOf(
+    "rebeccapurple",
+    document.querySelector(".button--stopCount")
+  );
 }
 
+function changeBackgroundOf(color, button) {
+  button.style.backgroundColor = color;
+}
 function countDownOne() {
   counter--;
   const counterNumber = document.querySelector(".timeOutput");
@@ -35,17 +44,13 @@ function component() {
   const timerButtonStart = createElement("button", {
     className: "button--startCount",
     innerText: "Count Down",
-    onclick: () => {
-      startTimer();
-    },
+    onclick: () => startTimer(),
   });
 
   const timerButtonStop = createElement("button", {
-    className: "button--startCount",
+    className: "button--stopCount",
     innerText: "Stop",
-    onclick: () => {
-      stopTimer();
-    },
+    onclick: () => stopTimer(),
   });
 
   const Container = createElement("div", {
