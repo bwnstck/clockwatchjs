@@ -4,22 +4,23 @@ import { createElement } from "./utils/elements";
 // !Variables
 
 let startInterval = false;
-let sec = 0;
-let min = 20;
 let h = 0;
+let min = 10;
+let sec = 0;
 
 let counter = timeToSeconds({ h: h, m: min, s: sec });
-
+console.log("Inital Counter", counter);
 // !Input Functions
 
-function getInput() {
+function getExistingInput() {
   const inputFieldValue = document.querySelector(".input--time").value;
 
   if (inputFieldValue) {
-    return inputValidation(inputFieldValue);
+    return inputToSeconds(inputFieldValue);
   } else {
-    counter = 0;
+    // counter = 0;
     console.log("Nichts zu returnen");
+    return false;
   }
 }
 
@@ -28,7 +29,7 @@ function timeToSeconds(timeObj) {
   return seconds;
 }
 
-function inputValidation(value) {
+function inputToSeconds(value) {
   let stringValueLength = value.toString().length;
 
   if (value) {
@@ -73,28 +74,33 @@ function inputValidation(value) {
 
 // !Timer Functions
 function countDownOne() {
-  const counterNumber = document.querySelector(".timeOutput");
   if (counter > 0) {
     counter--;
   } else {
     stopTimer();
-    return;
   }
+  const counterNumber = document.querySelector(".timeOutput");
   counterNumber.innerHTML = `${String(counter).toHHMMSS()} Sekunden`;
 }
 
 function startTimer() {
-  if (getInput()) {
-    counter = timeToSeconds({ h: Number(h), m: Number(min), s: Number(sec) });
+  console.log("Später counter", counter);
+  if (counter > 0) {
+    if (!startInterval) {
+      startInterval = setInterval(countDownOne, 1000);
+
+      changeBackgroundOf("red", document.querySelector(".button--stopCount"));
+    }
+  }
+  if (getExistingInput()) {
+    counter = getExistingInput();
+    // Input Reset
     const inputText = document.querySelector(".input--time");
     inputText.value = 0;
+
     const outputText = document.querySelector(".timeOutput");
     outputText.innerHTML = `${String(counter).toHHMMSS()} Sekunden`;
-  }
-  if (!startInterval) {
-    startInterval = setInterval(countDownOne, 1000);
-
-    changeBackgroundOf("red", document.querySelector(".button--stopCount"));
+  } else {
   }
 }
 
@@ -108,13 +114,15 @@ function stopTimer() {
 }
 
 function resetTimer(inputField, outputField) {
-  if (getInput() != undefined) {
+  if (getExistingInput() != undefined) {
     sec = 0;
-    min = 0;
+    min = 10;
     h = 0;
-    counter = 0;
-    inputField.innerHTML = `${counter} Sekunden`;
-    outputField.innerHTML = `${counter} Sekunden`;
+    counter = timeToSeconds({ h: h, m: min, s: sec });
+    console.log("counter", counter);
+
+    inputField.innerHTML = `${String(counter).toHHMMSS()} Sekunden`;
+    outputField.innerHTML = `${String(counter).toHHMMSS()} Sekunden`;
   } else {
     return;
   }
@@ -152,7 +160,7 @@ function createTimer() {
   });
   const explanation = createElement("p", {
     className: "explanation",
-    innerHTML: "11 = 11 sec <br> 120 = 1min20sec <br> 1000 = 10min",
+    innerHTML: " <br>11 = 11 sec <br> 120 = 1min20sec <br> 1000 = 10min",
   });
   const timeOutput = createElement("span", {
     className: "timeOutput",
