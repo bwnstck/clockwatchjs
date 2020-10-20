@@ -1,3 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+
+body {
+  font-family: "Fredoka One", cursive;
+}
 .container {
   color: red;
   display: grid;
@@ -33,4 +38,9 @@
   background-color: rebeccapurple;
   border: none;
   border-radius: 10px;
+}
+
+.explenation {
+  color: black;
+  font-size: 0.8rem;
 }
