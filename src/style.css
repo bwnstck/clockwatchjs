@@ -1,13 +1,24 @@
 .container {
   color: red;
+  display: grid;
+  align-content: center;
+
+  width: 80%;
+  height: 100vh;
+  margin: auto;
+  text-align: center;
 }
 
+.container > * {
+  margin: 0.5em;
+}
 .input--time {
 }
 
-.button-startCount {
+.button--startCount {
   padding: 1em;
   color: white;
   background-color: rebeccapurple;
   border: none;
+  border-radius: 10px;
 }
