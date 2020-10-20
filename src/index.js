@@ -1,7 +1,7 @@
 import "./style.css";
 import { createElement } from "./utils/elements";
 
-let startInterval = null;
+let startInterval = false;
 let counter = 400;
 
 function startTimer() {
@@ -12,6 +12,7 @@ function startTimer() {
 
 function stopTimer() {
   clearInterval(startInterval);
+  startInterval = false;
 }
 
 function countDownOne() {
