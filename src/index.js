@@ -96,7 +96,7 @@ function countDownOne() {
     scaleDown(rumbleBox, 600);
   }
   const counterNumber = document.querySelector(".timeOutput");
-  counterNumber.innerHTML = `${String(counter).toHHMMSS()} Sekunden`;
+  counterNumber.innerHTML = `${String(counter).toHHMMSS()}`;
 }
 
 function startTimer() {
@@ -115,7 +115,7 @@ function startTimer() {
     inputText.value = 0;
 
     const outputText = document.querySelector(".timeOutput");
-    outputText.innerHTML = `${String(counter).toHHMMSS()} Sekunden`;
+    outputText.innerHTML = `${String(counter).toHHMMSS()}`;
   } else {
   }
 }
@@ -136,8 +136,8 @@ function resetTimer(inputField, outputField) {
     counter = timeToSeconds({ h: h, m: min, s: sec });
     console.log("counter", counter);
 
-    inputField.innerHTML = `${String(counter).toHHMMSS()} Sekunden`;
-    outputField.innerHTML = `${String(counter).toHHMMSS()} Sekunden`;
+    inputField.innerHTML = `${String(counter).toHHMMSS()}`;
+    outputField.innerHTML = `${String(counter).toHHMMSS()}`;
   } else {
     return;
   }
@@ -179,7 +179,7 @@ function createTimer() {
   });
   const timeOutput = createElement("span", {
     className: "timeOutput",
-    innerHTML: `${String(counter).toHHMMSS()} Sekunden`,
+    innerHTML: `${String(counter).toHHMMSS()}`,
   });
 
   const timeInput = createElement("input", {
